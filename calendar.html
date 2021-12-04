@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <link rel = "stylesheet" href = "style.css"/>
+    <link rel = "stylesheet" href =  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
+    <script type="module" src="calendar.js"></script> 
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+    
+  <body>
+    <div id="logo">
+            <a href=index.html>
+            <img src="https://cdn.glitch.com/4836ddc0-1e6a-4032-b2fb-e2198fba4a5a%2FMacalester-Logo.png?v=1633112292897" />
+          </a>
+        </div>   
+        
+        <!-- Navigation Menu -->
+        <nav>
+          <div id="menu">
+            <ul>
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+            </ul>
+          </div>
+        </nav>
+      
+      <!--Background rectangle-->
+      <div id = headerRect>
+        <svg width="100%" height="120px"> </svg>
+      </div>
+    
+    <b><p id = 'currentDate'>
+      Today's Date: <script> document.write(new Date().toLocaleDateString()); </script>
+    </p></b>
+    <div id=  calendar>
+    <div id= "cal-wrap">
+      <!-- [PERIOD SELECTOR] -->
+      <div id="cal-date">
+        <select id="cal-mth"></select>
+        <select id="cal-yr"></select>
+        <input id="cal-set" type="button" value="SET"/>
+      </div>
+
+      <!-- [CALENDAR] -->
+      <div id="cal-container"></div>
+
+      <!-- [EVENT] -->
+      <div id="cal-event"></div>
+    </div>
+    </div>
+  </body>
+</html>

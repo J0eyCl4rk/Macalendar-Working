@@ -1,0 +1,244 @@
+header{
+     
+    overflow: hidden;
+}
+ 
+ 
+/****************/   
+/* Styling Logo */
+/****************/
+
+#logo{
+    float: left;
+    padding: none;
+    margin: none;
+    height: 100px;
+}
+ 
+#logo img{
+    z-index=10;
+    float: left;
+    padding: 10px 10px;
+    position:absolute;
+    height:110px
+} 
+ 
+/***************************/
+/* Styling Navigation Menu */
+/***************************/
+#menu{
+    float: right;
+    margin: none;
+    padding: 20px 0px
+}
+     
+#menu ul{
+    text-align: center;
+    float: right;
+    margin: none;
+    
+}
+     
+#menu li{
+    display: inline-block;
+    padding: none;
+    margin: none;
+}
+     
+#menu li a, #menu li span{
+    display: inline-block;
+    padding: 0em 1.5em;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 60px;
+    font-family: Garamond, serif;
+}
+     
+#menu li a{
+         
+    color: rgb(13,60, 97) ;
+}
+     
+#menu li:hover a, #menu li span{
+    background: rgb(239,79 ,38) ;
+    color: rgb(13,60, 97);
+    border-left: 1px solid rgb(13,60, 97);
+    text-decoration: none;
+}
+
+
+#headerRect{
+  z-index:-1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right:0px;
+  background-image: linear-gradient(to left, rgb(211,211 ,211) , rgb(13,60, 97));
+}
+
+#headerRect2{
+  z-index:-1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right:0px;
+  background-image: linear-gradient(to left, rgb(211,211 ,211) , rgb(13,60, 97));
+}
+
+#button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-family: Garamond, serif;
+}
+
+.but1{
+  background-color: rgb(13,60, 97);
+  border: none;
+  color: rgb(211,211 ,211);
+  padding: 20px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  font-size: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "Times New Roman", Times, serif;
+  font-family: Garamond, serif;
+}
+
+
+.bgSizeContain{
+  background-image: url(https://cdn.glitch.me/4836ddc0-1e6a-4032-b2fb-e2198fba4a5a%2Fadmissions-aid-hero2-1440x0-c-default.jpg?v=1633372835702);
+  background-size: cover;
+  height: 1000px;
+  position:relative;
+  top:120px;
+  opacity: 1;
+  z-index:-1;
+  
+}
+
+/* [CONTAINER] */
+
+  
+}
+#cal-wrap { 
+  max-width: 600px;
+  max-height:600px;
+}
+
+/* [PERIOD SELECTOR] */
+#cal-date { display: flex; 
+left:25px;
+position:absolute;}
+#cal-mth, #cal-yr, #cal-set {
+  box-sizing: border-box;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: 0;
+  color: #fff;
+}
+#cal-mth, #cal-yr { background: rgb(13,60, 97); }
+#cal-set { background: rgb(239,79 ,38); }
+
+/* [CALENDAR] */
+#calendar {
+  position:absolute;
+  top:130px;
+  left:25px;
+  width:800px;
+  height: 400px;
+  border-collapse: collapse;
+  min-width=1000px
+  min-height = 800px
+}
+#calendar tr.head td {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgb(13,60, 97) ;
+  padding: 15px;
+  text-align: center;
+}
+#calendar tr.day td {
+  border: 1px solid #ddd;
+  width: 14.28%;
+  padding: 15px 5px;
+  vertical-align: top;
+}
+#calendar tr.day td:hover {
+  background: rgb(13,60, 97);
+  cursor: pointer;
+}
+#calendar tr td.blank {
+  background: #f5f5f5;
+}
+#calendar .dd {
+  font-size: 1.2em;
+  color: #999;
+}
+#calendar .evt {
+  margin-top: 5px;
+  font-size: 0.8em;
+  font-weight: bold;
+  overflow: hidden;
+  color: #ff5d5d;
+}
+
+/* [ADD/EDIT EVENT] */
+#cal-event form {
+  text-align:center;
+  width:300px;
+  height:500px;
+  position: fixed;
+  top:260px;
+  left: 70%;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+#cal-event h1 {
+  line-height:25px;
+  color: #333;
+  padding: 20px;
+  text-align:center;
+}
+#evt-date {
+  color: #999;
+  margin: 10px 0;
+}
+#cal-event textarea {
+  text-align:center
+  display: block;
+  box-sizing: padding-box;
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  resize: none;
+}
+#cal-event input[type=button], #cal-event input[type=submit] {
+  text-align:center;
+  padding: 10px;
+  margin: 5px;
+  font-size: 1.2em;
+  border: 0;
+  background: #ea4c4c;
+  color: #fff;
+}
+
+#currentDate{
+  position:absolute;
+  top:200px;
+  left:50px;
+  color:rgb(239,79 ,38);
+  font-size:20px;
+}
+
+
