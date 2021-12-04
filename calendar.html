@@ -9,6 +9,7 @@
     <link rel = "stylesheet" href = "style.css"/>
     <link rel = "stylesheet" href =  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
     <script type="module" src="calendar.js"></script> 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>  
     
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
@@ -55,5 +56,33 @@
       <div id="cal-event"></div>
     </div>
     </div>
+    
+    <script>
+      function setEndTimeDrop(item) {
+    
+        end_option = document.getElementById('end');
+        $ (function(){
+
+      var theSelectedIndex = $(item)[0].selectedIndex;
+          console.log("Selected Index start: ",theSelectedIndex)
+      $.each($('select[name=end-time] option'), function(){
+        console.log("options: ", this)
+          var endOptionIndex = $(this).index();
+        console.log("endOptionIndex: ", endOptionIndex)
+          if (endOptionIndex < theSelectedIndex){
+            $(this).attr('disabled','disabled');
+          } else{
+            $(this).removeAttr('disabled').prop('selected', true);
+            return false;
+          }
+          });
+        });
+      }
+    </script> 
+    <script>
+      function formClose(){
+        document.getElementById("cal-event").innerHTML = "";
+      }
+    </script>
   </body>
 </html>

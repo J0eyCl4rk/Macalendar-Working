@@ -108,10 +108,9 @@ console.log("!!!!!!!!");
 var cal = {
   // (A) PROPERTIES
   mName : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // Month Names
-  data : null, // Events for the selected period
-  startData:null, //Start time for event
-  endData:null,
-  concatData:null, //Concat start and event data
+  data : {}, // Events for the selected period
+  startData:{}, //Start time for event
+  endData:{},
   sDay : 0, // Current selected day
   sMth : 0, // Current selected month
   sYear : 0, // Current selected year
@@ -133,36 +132,32 @@ var cal = {
         endDay = new Date(cal.sYear, cal.sMth, daysInMth).getDay(); // last day of the month
 
     // (B2) LOAD DATA FROM LOCALSTORAGE
-    cal.data = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
-    if (cal.data==null) {
-      localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
-      cal.data = {};
-    } else {
-      cal.data = JSON.parse(cal.data);
-    }
-    cal.startData = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
-    if (cal.startData==null) {
-      localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
-      cal.startData = {};
-    } else {
-      cal.startData = JSON.parse(cal.startData);
-    }
-    
-    cal.concatData = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
-    if (cal.concatData==null) {
-      localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
-      cal.concatData = {};
-    } else {
-      cal.concatData = JSON.parse(cal.concatData);
-    }
-    cal.endData = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
-    if (cal.endData==null) {
-      localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
-      cal.endData = {};
-    } else {
-      cal.endData = JSON.parse(cal.endData);
-    }
+    // cal.data = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
+    // if (cal.data==null) {
+    //   localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
+    //   cal.data = {};
+    // } else {
+    //   cal.data = JSON.parse(cal.data);
+    // }
+    // cal.startData = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
+    // if (cal.startData==null) {
+    //   localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
+    //   cal.startData = {};
+    // } else {
+    //   cal.startData = JSON.parse(cal.startData);
+    // }
+
+    // cal.endData = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
+    // if (cal.endData==null) {
+    //   localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
+    //   cal.endData = {};
+    // } else {
+    //   cal.endData = JSON.parse(cal.endData);
+    // }
+
+    //Set the firebase dictionary to have values loaded from back end
     cal.setFbaseData();
+    console.log("FIRE!!!!!",cal.fireBaseData);
 
     // (B3) DRAWING CALCULATIONS
     // Determine the number of blank squares before start of month
@@ -219,7 +214,7 @@ var cal = {
       else {
         cCell.innerHTML = "<div class='dd'>"+squares[i]+"</div>";
         if (cal.data[squares[i]]) {
-          cCell.innerHTML += "<div class='evt'>" + cal.data[squares[i]] + "</div>";
+          cCell.innerHTML += "<div class='evt'>" + cal.fireBaseData[squares[i]] + "</div>";
         }
         cCell.addEventListener("click", function(){
           cal.show(this);
@@ -245,14 +240,10 @@ var cal = {
     // (C2) DRAW EVENT FORM - ADD EVENT FORM
     var tForm = "<h1>" + (cal.data[cal.sDay] ? "EDIT" : "ADD") + " EVENT</h1>";
     tForm += "<div id='evt-date'>" + cal.sDay + " " + cal.mName[cal.sMth] + " " + cal.sYear + "</div>";
-    //tForm += "<textarea id='evt-details' required>" + (cal.data[cal.sDay] ? cal.data[cal.sDay] : "Event") + "</textarea>";
     tForm += "<textarea id='evt-details' required>" + "</textarea>";
-    // tForm += "<textarea id='name' required>" + (cal.data[cal.sDay] ? cal.data[cal.sDay] : "Name") + "</textarea>";
-    // tForm += "<textarea id='start' required>" + (cal.data[cal.sDay] ? cal.data[cal.sDay] : "Start Time") + "</textarea>";
-    // tForm += "<textarea id='end' required>" + (cal.data[cal.sDay] ? cal.data[cal.sDay] : "End Time") + "</textarea>";
-    tForm += "<select id = 'start' onchange = 'favTutorial()'' required='required'> <option value=''> ---Start time--- </option> <option> 12 am </option> <option> 1 am </option> <option> 2 am </option> <option> 3 am </option> <option> 4 am </option> <option> 5 am </option> <option> 5 am </option> <option> 6 am </option> <option> 7 am </option> <option> 8 am </option> <option> 9 am </option> <option> 10 am </option> <option> 11 am </option> <option> 12 pm </option>  <option> 1 pm </option> <option> 2 pm </option> <option> 3 pm </option> <option> 4 pm </option> <option> 5 pm </option> <option> 6 pm </option> <option> 7 pm </option> <option> 8 pm </option> <option> 9 pm </option> <option> 10 pm </option> <option> 11 pm </option> </select>";
-    tForm += "<select id = 'finish' onchange = 'favTutorial()'' required='required'> <option value = ''> ---End time--- </option> <option> 12 am </option> <option> 1 am </option> <option> 2 am </option> <option> 3 am </option> <option> 4 am </option> <option> 5 am </option> <option> 5 am </option> <option> 6 am </option> <option> 7 am </option> <option> 8 am </option> <option> 9 am </option> <option> 10 am </option> <option> 11 am </option> <option> 12 pm </option>  <option> 1 pm </option> <option> 2 pm </option> <option> 3 pm </option> <option> 4 pm </option> <option> 5 pm </option> <option> 6 pm </option> <option> 7 pm </option> <option> 8 pm </option> <option> 9 pm </option> <option> 10 pm </option> <option> 11 pm </option> </select>";
-    tForm += "<input type='button' value='Close' onclick='cal.close()'/>";
+    tForm += "<select id = 'start' name = 'start-time' onchange = 'setEndTimeDrop(this)' required='required'> <option value=''> ---Start time--- </option> <option> 12 am </option> <option> 1 am </option> <option> 2 am </option> <option> 3 am </option> <option> 4 am </option> <option> 5 am </option> <option> 5 am </option> <option> 6 am </option> <option> 7 am </option> <option> 8 am </option> <option> 9 am </option> <option> 10 am </option> <option> 11 am </option> <option> 12 pm </option>  <option> 1 pm </option> <option> 2 pm </option> <option> 3 pm </option> <option> 4 pm </option> <option> 5 pm </option> <option> 6 pm </option> <option> 7 pm </option> <option> 8 pm </option> <option> 9 pm </option> <option> 10 pm </option> <option> 11 pm </option> </select>";
+    tForm += "<select id = 'finish' name = 'end-time' required='required'> <option value = ''> ---End time--- </option> <option> 12 am </option> <option> 1 am </option> <option> 2 am </option> <option> 3 am </option> <option> 4 am </option> <option> 5 am </option> <option> 5 am </option> <option> 6 am </option> <option> 7 am </option> <option> 8 am </option> <option> 9 am </option> <option> 10 am </option> <option> 11 am </option> <option> 12 pm </option>  <option> 1 pm </option> <option> 2 pm </option> <option> 3 pm </option> <option> 4 pm </option> <option> 5 pm </option> <option> 6 pm </option> <option> 7 pm </option> <option> 8 pm </option> <option> 9 pm </option> <option> 10 pm </option> <option> 11 pm </option> </select>";
+    tForm += "<input type='button' value='Close' onClick = 'formClose()'/>";
     tForm += "<input type='button' value='Delete' onclick='cal.del()'/>";
     tForm += "<input type='submit' value='Save'/>";
 
@@ -408,14 +399,13 @@ var cal = {
 
       //cal.list();
     };
-    console.log("concat", returnDictionary);
+    //console.log("concat", returnDictionary);
     
     return returnDictionary;
   },
 
   setFbaseData : function (){
     cal.fireBaseData = cal.loopFbaseList();
-    console.log(cal.fireBaseData);
   },
 
   // (F) DELETE EVENT FOR SELECTED DATE
@@ -426,6 +416,7 @@ var cal = {
       cal.loadCalendar();;
     }
   },
+
   loadCalendar : function(){
     console.log("LOADCAL!!!")
     cal.loadFBase();
