@@ -1,110 +1,5 @@
 import firebase from './firebase.js';
 
-console.log("!!!!!!!!");
-// firebase.ref("events");
-
-
-// firebase.firestore().collection("events").doc("event6").set({
-//   describtion: "Los Angeles",
-//   time: "30000000",
-//   title: "USA"
-// })
-
-// const items = [];
-// ref.onSnapshot((querySnapshot) => {
-//   querySnapshot.forEach((doc) => {
-//     items.push(doc.data());
-//   });
-// })
-
-// const items = [];
-// const ref = firebase.firestore().collection('events');
-// ref.onSnapshot((querySnapshot) => {
-//     querySnapshot.forEach((doc) => {
-//       items.push(doc.data());
-//       console.log('!!!item111111',items);
-//     });
-// })
-// console.log('!!!item',items);
-
-
-// var docRef = firebase.firestore().collection("events").doc("event1");
-
-// var postID = firebase.firestore().collection("events").docRef;
-// console.log('!!!postID', postID);
-
-// console.log('!!!check update');
-
-
-
-// docRef.get().then((doc) => {
-//     if (doc.exists) {
-//         console.log("Document data:", doc.data());
-//     } else {
-//         // doc.data() will be undefined in this case
-//         console.log("No such document!");
-//     }
-// }).catch((error) => {
-//     console.log("Error getting document:", error);
-// });
-
-// const items = [];
-// firebase.firestore().collection("events").get().then((querySnapshot) => {
-//   querySnapshot.forEach((doc) => {
-//       // doc.data() is never undefined for query doc snapshots
-//       console.log(doc.id, " => ", doc.data());
-//       items.push(doc.data());
-//       //refresh here
-
-//   });
-//   console.log('!!!item1111111',items);
-// });
-
-
-// console.log('!!!item',items);
-// console.log('!!!Wanted', firebase.firestore().collection("events"));
-// // console.log("!!!app",app);
-// console.log("!!!app",firebase);
-
-
-
-
-// /*https://code-boxx.com/simple-pure-javascript-calendar-events/*/
-// import { initializeApp } from 'firebase/app';
-// import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-//   // TODO: Add SDKs for Firebase products that you want to use
-//   // https://firebase.google.com/docs/web/setup#available-libraries
-
-//   // Your web app's Firebase configuration
-//   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-//   const firebaseConfig = {
-//     apiKey: "AIzaSyCn2jEH5aiF67SdeCVqrce7eDBwc9MqNiU",
-//     authDomain: "macalendartest.firebaseapp.com",
-//     projectId: "macalendartest",
-//     storageBucket: "macalendartest.appspot.com",
-//     messagingSenderId: "611450666224",
-//     appId: "1:611450666224:web:dd5536698b44df2e3bd635",
-//     measurementId: "G-CXH35XSMDH"
-//   };
-
-//   // Initialize Firebase
-//   const app = initializeApp(firebaseConfig);
-//   const db = getFirestore(app);
-
-// console.log("!!!appeee",app);
-// console.log("!!!appeeee",firebase.firestore().collection('events'));
-// // firebase.ref("events");
-
-// const ref = firebase.firestore().collection('events');
-// ref.onSnapshot((querySnapshot) => {
-//     const items = [];
-//     querySnapshot.forEach((doc) => {
-// items.push(doc.data());
-// console.log('!!!item',items);
-// });
-// })
-
-
 var cal = {
   // (A) PROPERTIES
   mName : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // Month Names
@@ -132,29 +27,6 @@ var cal = {
         endDay = new Date(cal.sYear, cal.sMth, daysInMth).getDay(); // last day of the month
 
     // (B2) LOAD DATA FROM LOCALSTORAGE
-    // cal.data = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
-    // if (cal.data==null) {
-    //   localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
-    //   cal.data = {};
-    // } else {
-    //   cal.data = JSON.parse(cal.data);
-    // }
-    // cal.startData = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
-    // if (cal.startData==null) {
-    //   localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
-    //   cal.startData = {};
-    // } else {
-    //   cal.startData = JSON.parse(cal.startData);
-    // }
-
-    // cal.endData = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
-    // if (cal.endData==null) {
-    //   localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
-    //   cal.endData = {};
-    // } else {
-    //   cal.endData = JSON.parse(cal.endData);
-    // }
-
     //Set the firebase dictionary to have values loaded from back end
     cal.setFbaseData();
     console.log("FIRE!!!!!",cal.fireBaseData);
@@ -269,37 +141,14 @@ var cal = {
     evt.preventDefault();
 
     firebase.firestore().collection('events')
-    console.log("!!!appZZZZZ",firebase.firestore().collection('events'));
-    console.log("!!!value type",document.getElementById("evt-details").value,document.getElementById("start").value,document.getElementById("finish").value)
-    // cal.data[cal.sDay] = document.getElementById("evt-details").value;
-
-    // cal.startData[cal.sDay] = document.getElementById("start").value;
-    
-    // cal.endData[cal.sDay] = document.getElementById("finish").value;
-
-
     var size = 0;
     firebase.firestore().collection("events").get().then(snap => {
       size = snap.size // will return the collection size
       console.log('!!!size',size)
     });
-
-
-    // var newPostRef = firebase.firestore().collection('events').push({
-    //   author: "gracehop",
-    //   title: "Announcing COBOL, a New Programming Language"
-    //  });
      
      // Get the unique ID generated by push() by accessing its key
      var postID = firebase.firestore().collection("events").key;
-     console.log('!!!postID', postID);
-    // var strName = "event"+size;
-    // console.log('!!!str',strName);
-
-
-    // const theID = firebase.firestore().generateID() // something like this
-    //  console.log('!!!',theID);
-
 
     firebase.firestore().collection("events").doc(postID).set({
       evtDetails: document.getElementById("evt-details").value,
@@ -309,26 +158,6 @@ var cal = {
       month: cal.sMth,
       year: cal.sYear
     })
-
-
-
-// firebase.firestore().collection("events").get().then((querySnapshot) => {
-//   querySnapshot.forEach((doc) => {
-//       const items = [];
-//     // doc.data() is never undefined for query doc snapshots
-//       console.log(doc.id, " => ", doc.data());
-//       items.push(doc.data());
-//       cal.itemTest = items;
-//       console.log("!!!!itemtest",cal.itemTest);
-//       //refresh
-
-//       cal.list();
-//       cal.loadFBase(cal.itemTest);
-//   });
-//   console.log('!!!item1111111',items);
-// });
-
-
 
     var docRef = firebase.firestore().collection("events").doc("event1");
     const item1 = [];
@@ -344,16 +173,7 @@ var cal = {
         console.log("Error getting document:", error);
     });
 
-
-
-    // var concat = cal.startData[cal.sDay] + " - "+cal.endData[cal.sDay]+" " + cal.data[cal.sDay];
-    // cal.concatData[cal.sDay] = concat;
-    // localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, JSON.stringify(cal.concatData));
-    // cal.list();
-    
     cal.loadCalendar();
-    //location.reload();
-    //cal.list();
   },
 
   loadFBase : function(){
@@ -363,22 +183,14 @@ var cal = {
       console.log(doc.id, " => ", doc.data());
       cal.items.push(doc.data());
       console.log(cal.items);
-      // cal.itemTest = items;
-      // console.log("!!!!itemtest",cal.itemTest);
-      //refresh
-      //location.reload();
-      //cal.list();
-      // cal.loadFBase(cal.itemTest);
-      //console.log('!!!item1111111',items);
   });
     console.log('!!!item1111111',cal.items);
 });
     console.log('!!!loadBase!!!!!!!!!!!!!!!' );
-    //location.reload();
   },
 
   loopFbaseList : function (){
-    console.log("HELOOOOOOOOOOOOOOOO");
+    console.log("Looping items list");
     var returnDictionary = {};
     for(var i = 0; i<cal.items.length;i++){
       cal.sDay = cal.items[i]["day"];
@@ -391,16 +203,7 @@ var cal = {
 
       var concat1 = cal.startData[cal.sDay] + " - "+cal.endData[cal.sDay]+" " + cal.data[cal.sDay];
       returnDictionary[cal.sDay] = concat1;
-      //console.log("concat", returnDictionary);
-      // localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, JSON.stringify(cal.fireBaseData));
-      // localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, JSON.stringify(cal.data));
-      // localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, JSON.stringify(cal.endData));
-      // localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, JSON.stringify(cal.startData));
-
-      //cal.list();
     };
-    //console.log("concat", returnDictionary);
-    
     return returnDictionary;
   },
 
@@ -408,7 +211,8 @@ var cal = {
     cal.fireBaseData = cal.loopFbaseList();
   },
 
-  // (F) DELETE EVENT FOR SELECTED DATE
+  // (F) DELETE EVENT FOR SELECTED DATE 
+  //FIX
   del : function () {
     if (confirm("Remove event?")) {
       delete cal.data[cal.sDay];
@@ -453,9 +257,5 @@ window.addEventListener("load", function () {
   }
 
   // (G4) START - DRAW CALENDAR
-  //document.getElementById("cal-set").addEventListener("click", cal.list);
   cal.loadCalendar();
-  // cal.list();
-  // cal.list();
-  //cal.loadFBase(cal.itemTest);
 });
