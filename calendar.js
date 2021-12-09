@@ -97,6 +97,7 @@ var cal = {
             Swal.fire(  'Oops, this date is already populated!',
             'Please select another day', 
             'error');
+            cal.close();
             }
         });
       }
@@ -120,11 +121,11 @@ var cal = {
     // (C2) DRAW EVENT FORM - ADD EVENT FORM
     var tForm = "<h1>" + (cal.data[cal.sDay] ? "EDIT" : "ADD") + " EVENT</h1>";
     tForm += "<div id='evt-date'>" + cal.sDay + " " + cal.mName[cal.sMth] + " " + cal.sYear + "</div>";
-    tForm += "<textarea id='evt-details' required>" + "</textarea>";
+    tForm += "<textarea id='evt-details' maxlength='50' required>" + "</textarea>";
     tForm += "<select id = 'start' name = 'start-time' onchange = 'setEndTimeDrop(this)' required='required'> <option value=''> ---Start time--- </option> <option> 12 am </option> <option> 1 am </option> <option> 2 am </option> <option> 3 am </option> <option> 4 am </option> <option> 5 am </option> <option> 5 am </option> <option> 6 am </option> <option> 7 am </option> <option> 8 am </option> <option> 9 am </option> <option> 10 am </option> <option> 11 am </option> <option> 12 pm </option>  <option> 1 pm </option> <option> 2 pm </option> <option> 3 pm </option> <option> 4 pm </option> <option> 5 pm </option> <option> 6 pm </option> <option> 7 pm </option> <option> 8 pm </option> <option> 9 pm </option> <option> 10 pm </option> <option> 11 pm </option> </select>";
     tForm += "<select id = 'finish' name = 'end-time' required='required'> <option value = ''> ---End time--- </option> <option> 12 am </option> <option> 1 am </option> <option> 2 am </option> <option> 3 am </option> <option> 4 am </option> <option> 5 am </option> <option> 5 am </option> <option> 6 am </option> <option> 7 am </option> <option> 8 am </option> <option> 9 am </option> <option> 10 am </option> <option> 11 am </option> <option> 12 pm </option>  <option> 1 pm </option> <option> 2 pm </option> <option> 3 pm </option> <option> 4 pm </option> <option> 5 pm </option> <option> 6 pm </option> <option> 7 pm </option> <option> 8 pm </option> <option> 9 pm </option> <option> 10 pm </option> <option> 11 pm </option> </select>";
     tForm += "<input type='button' value='Close' onClick = 'formClose()'/>";
-    tForm += "<input type='button' value='Delete' onclick='cal.del()'/>";
+    //tForm += "<input type='button' value='Delete' onclick='cal.del()'/>";
     tForm += "<input type='submit' value='Save'/>";
 
     // (C3) ATTACH EVENT FORM
@@ -236,7 +237,7 @@ var cal = {
   loadCalendar : function(){
     console.log("LOADCAL!!!")
     cal.loadFBase();
-    setTimeout(() => {cal.list()},500);
+    setTimeout(() => {cal.list()},1000);
   }
 };
 
@@ -249,24 +250,26 @@ window.addEventListener("load", function () {
 
   // (G2) APPEND MONTHS SELECTOR
   var month = document.getElementById("cal-mth");
-  for (var i = 0; i < 12; i++) {
+  //for (var i = 0; i < 1; i++) {
+    var i = nowMth;
     var opt = document.createElement("option");
     opt.value = i;
     opt.innerHTML = cal.mName[i];
     if (i==nowMth) { opt.selected = true; }
     month.appendChild(opt);
-  }
+  //}
 
   // (G3) APPEND YEARS SELECTOR
   // Set to 10 years range. Change this as you like.
   var year = document.getElementById("cal-yr");
-  for (var i = nowYear-10; i<=nowYear+10; i++) {
+  //for (var i = nowYear; i<=nowYear+1; i++) {
+    var i = nowYear;
     var opt = document.createElement("option");
     opt.value = i;
     opt.innerHTML = i;
     if (i==nowYear) { opt.selected = true; }
     year.appendChild(opt);
-  }
+  //}
 
   // (G4) START - DRAW CALENDAR
   cal.loadCalendar();
