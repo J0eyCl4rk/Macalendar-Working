@@ -24,6 +24,7 @@ var cal = {
     // Note - Sun is 0 & Sat is 6
     cal.sMth = parseInt(document.getElementById("cal-mth").value); // selected month
     cal.sYear = parseInt(document.getElementById("cal-yr").value); // selected year
+    
     var daysInMth = new Date(cal.sYear, cal.sMth+1, 0).getDate(), // number of days in selected month
         startDay = new Date(cal.sYear, cal.sMth, 1).getDay(), // first day of the month
         endDay = new Date(cal.sYear, cal.sMth, daysInMth).getDay(); // last day of the month
@@ -117,6 +118,11 @@ var cal = {
   show : function (el) {
     // (C1) FETCH EXISTING DATA
     cal.sDay = el.getElementsByClassName("dd")[0].innerHTML;
+    var now = new Date(),
+      nowMth = now.getMonth(),
+      nowYear = parseInt(now.getFullYear());
+    cal.sYear = nowYear;
+    cal.sMth = nowMth;
 
     // (C2) DRAW EVENT FORM - ADD EVENT FORM
     var tForm = "<h1>" + (cal.data[cal.sDay] ? "EDIT" : "ADD") + " EVENT</h1>";
@@ -248,6 +254,7 @@ window.addEventListener("load", function () {
       nowMth = now.getMonth(),
       nowYear = parseInt(now.getFullYear());
 
+  console.log(now);
   // (G2) APPEND MONTHS SELECTOR
   var month = document.getElementById("cal-mth");
   //for (var i = 0; i < 1; i++) {
@@ -260,7 +267,7 @@ window.addEventListener("load", function () {
   //}
 
   // (G3) APPEND YEARS SELECTOR
-  // Set to 10 years range. Change this as you like.
+  // Set to 1 years range. Change this as you like.
   var year = document.getElementById("cal-yr");
   //for (var i = nowYear; i<=nowYear+1; i++) {
     var i = nowYear;
