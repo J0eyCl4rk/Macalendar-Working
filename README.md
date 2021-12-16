@@ -29,3 +29,4 @@ The bulk of the heavy lifting for the calendar itself is done in the calendar.js
 <br/>
 <img width="1432" alt="Screen Shot 2021-12-16 at 9 18 20 AM" src="https://user-images.githubusercontent.com/60119831/146401311-c4d48061-0002-4501-bc43-c871cbee6bfa.png">
 
+<br/><br/> **We obtained source code for the calendar from https://code-boxx.com/simple-pure-javascript-calendar-events/ and modified to fit our project goals**
