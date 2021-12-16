@@ -7,13 +7,13 @@ var cal = {
   mName : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // Month Names
   data : {}, // Events for the selected period
   startData:{}, //Start time for event
-  endData:{},
+  endData:{}, //End times for events
   sDay : 0, // Current selected day
   sMth : 0, // Current selected month
   sYear : 0, // Current selected year
   sMon : false, // Week start on Monday?
-  fbaseHolder:[],
-  items:[],
+  fbaseHolder:[], //firebase events holder
+  items:[], //firebase events load list
   // (B) DRAW CALENDAR FOR SELECTED MONTH
   list : function () {
 
@@ -149,8 +149,6 @@ var cal = {
   },
 
   // (E) SAVE EVENT
-
-  //write things here!!!!!!!!!!!!!!!!!!!!!!!
   save : function (evt) {
     evt.stopPropagation();
     evt.preventDefault();
@@ -191,14 +189,10 @@ var cal = {
     cal.loadCalendar();
   },
 
+  //Getting events from firebase and adding them to the items list
   loadFBase : function(){
     firebase.firestore().collection("events").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        //ASK YIXUAN
-        //var dict = doc.data();
-        //dict["id"]=(doc.id);
-        //cal.items.push(dict);
-    // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());
       cal.items.push(doc.data());
       console.log(cal.items);
@@ -208,6 +202,8 @@ var cal = {
     console.log('!!!loadBase!!!!!!!!!!!!!!!' );
   },
 
+  //Looping through the list and concatinating the start time, end time, and details into one string to put on calendar
+  //returns a dictionary with the day as the key and the concat string as the value
   loopFbaseList : function (){
     console.log("Looping items list");
     var returnDictionary = {};
@@ -226,12 +222,12 @@ var cal = {
     return returnDictionary;
   },
 
+  //Setting firebaseData dictionary equal to the loopFbaseList dictionary
   setFbaseData : function (){
     cal.fireBaseData = cal.loopFbaseList();
   },
 
-  // (F) DELETE EVENT FOR SELECTED DATE 
-  //FIX
+  // (F) DELETE EVENT FOR SELECTED DATE - NOT WORKING CURRENTLY!!!!
   del : function () {
     if (confirm("Remove event?")) {
       delete cal.data[cal.sDay];
@@ -240,6 +236,7 @@ var cal = {
     }
   },
 
+  //calling the firebase functions above to load in the events locally then refreshing calendar after 1 sec
   loadCalendar : function(){
     console.log("LOADCAL!!!")
     cal.loadFBase();
