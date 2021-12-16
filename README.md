@@ -17,10 +17,10 @@ To start testing: create a local host session or load firebase hosting
 
 <br/> **Local Host:** ```php -S localhost:8000``` in command line
 <br/><br/> **Firebase Hosting:** 1.Install Firebase CLI
-2. Intialize Firebase hosting by typing "firebase init hosting" in terminal of root project directory
-3. Select Firebase project to connect with local project
-4. Create a file named "public" and move all static files like index.html to folder
-5. Deploy site by running command "firebase deploy --only hosting" in terminal of root project directory
+<br/><br/>2. Intialize Firebase hosting by typing "firebase init hosting" in terminal of root project directory
+<br/><br/>3. Select Firebase project to connect with local project
+<br/><br/>4. Create a file named "public" and move all static files like index.html to folder
+<br/><br/>5. Deploy site by running command "firebase deploy --only hosting" in terminal of root project directory
 
 # IV. Code Intro
 
